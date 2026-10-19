@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+      <meta charset="UTF-8">
+      <title>系统文档</title>
+      <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+      <div class="sidebar-wrap">
+            <div class="sidebar">
+                  <h2>系统常见问题</h2>
+                  <div class="menu-item active" data-page="pages/开户.html">🏠 开户-分账号</div>
+                  <div class="menu-item" data-page="pages/账号内添加设备型号.html">🏠 账号内添加设备型号</div>
+                  <div class="menu-item" data-page="pages/限购定价建档.html">📖 限购定价建档</div>
+                  <div class="menu-item" data-page="pages/遗失补卡.html">🌿 遗失补卡</div>
+                  <div class="menu-item" data-page="pages/换表写卡.html">🏯 换表写卡（换表卡调整）</div>
+                  <div class="menu-item" data-page="pages/修改设置卡.html">🔗 修改设置卡</div>
+
+                  <div class="menu-item" data-page="pages/宇优系统报装.html">🗺️系统报装（批量导入用户）</div>
+                  <div class="menu-item" data-page="pages/NB物联网热水表报装.html">🌡️ NB物联网热水表报装</div>
+                  <div class="menu-item" data-page="pages/远程开关阀.html">🧭 NB远程开关阀</div>
+                  <div class="menu-item" data-page="pages/错误代码.html">❄️ 错误代码</div>
+                  <div class="menu-item" data-page="pages/说明.html">❄️ 说明书</div>
+
+
+                  <div class="menu-item has-submenu">📋 单机版<span class="arrow">></span></div>
+
+                  <div class="submenu" id="singlePlayerSubmenu">
+                        <div class="menu-item" data-page="pages/单机版img/二次充值.html">📋二次充值</div>
+                        <div class="menu-item" data-page="pages/单机版img/二次开户.html">📋二次开户</div>
+                        <div class="menu-item" data-page="pages/单机版img/变更设置卡.html">📋变更设置卡</div>
+                        <div class="menu-item" data-page="pages/单机版img/卡片制作.html">📋卡片制作</div>
+                        <div class="menu-item" data-page="pages/单机版img/换表卡调整.html">📋换表卡调整</div>
+                        <div class="menu-item" data-page="pages/单机版img/补卡.html">📋补卡</div>
+                        <div class="menu-item" data-page="pages/单机版img/单机版手册.html">📋单机版手册</div>
+                  </div>
+
+                  <!-- 🔍📝📋 🧩💡🧭🏮 🗺️-->
+            </div>
+      </div>
+      <!-- <button class="toggle-btn">◀</button> -->
+
+      <!-- iframe 用来加载独立页面 -->
+      <div class="content">
+            <iframe id="contentIframe" src="pages/开户.html"></iframe>
+      </div>
+
+      <script>
+            const menuItems = document.querySelectorAll('.menu-item');
+            const iframe = document.getElementById('contentIframe');
+            const sidebarWrap = document.querySelector('.sidebar-wrap');
+            const toggleBtn = document.querySelector('.toggle-btn');
+            const hasSubmenu = document.querySelector('.has-submenu');
+            const submenu = document.getElementById('singlePlayerSubmenu');
+            const arrow = document.querySelector('.arrow');
+            let isCollapsed = false;
+
+            //菜单点击，切换iframe地址
+            menuItems.forEach(item => {
+                  item.addEventListener('click', () => {
+                        // 如果点击的是“单机版”父菜单，只展开/收起，不切换 iframe
+                        if (item.classList.contains('has-submenu')) {
+                              submenu.classList.toggle('open');
+                              arrow.classList.toggle('rotate');
+                              return;
+                        }
+
+                        // 切换 active 状态
+                        menuItems.forEach(mi => mi.classList.remove('active'));
+                        item.classList.add('active');
+
+                        // 加载对应页面
+                        const pagePath = item.getAttribute('data-page');
+                        if (pagePath) {
+                              iframe.src = pagePath;
+                        }
+                  });
+            });
+
+      </script>
+</body>
+
+</html>
